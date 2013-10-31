@@ -5,14 +5,13 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
-
+from IPython import embed
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
-app = Flask(
-    __name__, 
-    static_folder=os.path.join(PROJECT_ROOT, 'public'),
-    static_url_path='/public'
-)
+
+
+app = Flask(__name__.split('.')[0])
+app.config.from_object('wedding.envvar')
 
 def validate_token(token, time):
     return md5.md5(secret_key+time).hexdigest() == token
@@ -28,7 +27,3 @@ def render(template_name, context={}):
 @app.route("/", methods=["GET"])
 def index():
     return render("index.html")
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)

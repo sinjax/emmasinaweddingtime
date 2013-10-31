@@ -5,7 +5,7 @@
     <title>{% block title %}{% endblock %}</title>
 
     <!-- Le styles -->
-    <link href="/public/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ url_for('public', filename='assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="/public/assets/css/bootstrap-responsive.css" rel="stylesheet">
     
 
@@ -19,7 +19,12 @@
   <script src="/public/assets/js/bootstrap-carousel.js"></script>
   </head>
 
-  <body>    <!-- NAVBAR
+  <body>    
+  <!-- TITLE Image Area-->
+  <div class="jumbotron">
+    
+  </div>
+  <!-- NAVBAR
     ================================================== -->
     <div class="navbar-wrapper">
       <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
