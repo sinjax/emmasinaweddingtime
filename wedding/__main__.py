@@ -6,6 +6,5 @@ from IPython import embed
 
 
 db.create_all()
-embed()
 app.run()
 

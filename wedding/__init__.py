@@ -6,6 +6,7 @@ from flask import render_template
 from flask import request
 from flask import redirect
 from IPython import embed
+from flask import render_template_string
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -27,3 +28,13 @@ def render(template_name, context={}):
 @app.route("/", methods=["GET"])
 def index():
     return render("index.html")
+
+@app.route("/templated/<path:filename>", methods=["GET"])
+def templated(filename):
+	staticfile = os.sep.join([PROJECT_ROOT,"static",filename])
+	if not os.path.exists(staticfile):
+		return None
+
+	content = file(staticfile).read()
+
+	return render_template_string(content)

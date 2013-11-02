@@ -8,50 +8,7 @@
     <!-- Le styles -->
     <link href="{{ url_for('static', filename='assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='assets/css/jumbotron-narrow.css') }}" rel="stylesheet">
-    <!-- <link href="{{ url_for('static',filename='assets/css/bootstrap-responsive.css') }}" rel="stylesheet"> -->
-
-    <style type="text/css" media="screen">
-    /* Customize container */
-    .titleholder {
-        margin-bottom:0;
-        padding:0;
-        margin:0;
-        background-color:white;
-    }
-    #titleimg{
-      margin: 0 auto;
-    }
-    /* Customize container */
-    @media (min-width: 700px) {
-        #titleimg {
-          width:700px;
-          height:300px;
-          background-image: url("{{ url_for('static', filename='assets/imgs/700px.jpg') }}")
-        }
-    }
-    @media (max-width: 699px) and (min-width: 500px) { 
-        #titleimg {
-          width:500px;
-          height:200px;
-          background-image: url("{{ url_for('static', filename='assets/imgs/500px.jpg') }}")
-        }
-    }
-    @media (max-width: 499px){ 
-        #titleimg {
-          width:300px;
-          height:150px;
-          background-image: url("{{ url_for('static', filename='assets/imgs/300px.jpg') }}")
-        }
-    }
-    @media (max-width: 399px){ 
-        #titleimg {
-          width:200px;
-          height:100px;
-          background-image: url("{{ url_for('static', filename='assets/imgs/200px.jpg') }}")
-        }
-    }
-    </style>
-
+     <link href="{{ url_for('static', filename='assets/css/custom.css') }}" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -65,23 +22,22 @@
 <body>
     <div class="container">
         <!-- TITLE Image Area-->
-        <div class="titleholder jumbotron">
-            <div id="titleimg"></div>
-        </div>
+        <div id="titleimg">
+            </div>
         <!-- NAVBAR
     ================================================== -->
-        <div class="navbar navbar-inverse">
-            <div class="container">
+        <div class="navbar" role="navigation">
+            
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="#">Emma &amp; Sina's Wedding</a> -->
                 </div>
+
                 <div class="navbar-collapse collapse">
-                    <ul class="nav nav-pills nav-justified">
+                    <ul class="nav nav-pills nav-justified nav-centered">
                         <li class=""><a href="">Details</a>
                         </li>
                         <li class=""><a href="">Location</a>
@@ -93,8 +49,8 @@
                     </ul>
                 </div>
                 <!--/.navbar-collapse -->
-            </div>
         </div>
+        
         <div class="container">
             {% block content %} {% endblock %}
         </div>
