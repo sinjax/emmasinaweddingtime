@@ -6,5 +6,4 @@ from IPython import embed
 
 
 db.create_all()
-app.run()
-
+app.run(port=7171)
