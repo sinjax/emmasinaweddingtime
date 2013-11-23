@@ -26,8 +26,18 @@ def render(template_name, context={}):
     return render_template(template_name, **context)
 
 @app.route("/", methods=["GET"])
-def index():
-    return render("index.html")
+def index(): return render("index.html")
+
+@app.route("/location", methods=["GET"])
+def location(): return render("location.html")
+
+@app.route("/gifts", methods=["GET"])
+def gifts(): return render("gifts.html")
+
+@app.route("/potluck", methods=["GET"])
+def potluck(): return render("potluck.html")
+
+
 
 @app.route("/templated/<path:filename>", methods=["GET"])
 def templated(filename):

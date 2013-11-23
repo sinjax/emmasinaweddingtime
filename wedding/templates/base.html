@@ -26,7 +26,7 @@
             </div>
         <!-- NAVBAR
     ================================================== -->
-        <div class="navbar" role="navigation">
+        <div class="navbar navbar-default" role="navigation">
             
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,14 +37,14 @@
                 </div>
 
                 <div class="navbar-collapse collapse">
-                    <ul class="nav nav-pills nav-justified nav-centered">
-                        <li class=""><a href="">Details</a>
+                    <ul class="nav nav-pills nav-justified ">
+                        <li class=""><a href="{{ url_for('index') }}">Details</a>
                         </li>
-                        <li class=""><a href="">Location</a>
+                        <li class=""><a href="{{ url_for('location') }}">Location</a>
                         </li>
-                        <li class=""><a href="">Gifts</a>
+                        <li class=""><a href="{{ url_for('gifts') }}">Gifts</a>
                         </li>
-                        <li class=""><a href="">Bring &amp; Share</a>
+                        <li class=""><a href="{{ url_for('potluck') }}">Bring &amp; Share</a>
                         </li>
                     </ul>
                 </div>
