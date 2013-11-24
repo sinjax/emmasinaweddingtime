@@ -106,9 +106,11 @@ $(document).ready(function () {
 
 <h2> Current Guest List </h2>
 <p>These lovely people have confirmed so far. If you know them perhaps you'd like to self organise a lift share?</p>
+<ol>
 {% for entry in confirmedAttending %}
-    <li><h2>{{ entry.name }}</h2>
+    <li>{{ entry.name }}</li>
 {% else %}
-<li><em>Unbelievable.  No entries here so far</em>
+No confirmed guests yet!
 {% endfor %}
+</ol>
 {% endblock %}

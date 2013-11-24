@@ -7,19 +7,18 @@ from IPython import embed
 
 @app.route('/rsvp/confirm/<id>', methods=['GET'])
 def rsvpconfirm(id):
-    db.session.query(RSVP).filter_by(unique_hash=id).update({"confirmed":True, "checked":True})
+    db.session.query(RSVP).filter_by(unique_hash=id).update({"checked":True})
     rsvp = db.session.query(RSVP).filter_by(unique_hash=id).first()
     db.session.commit()
-    return "Set %s to Confirmed: %s"%(rsvp.name, rsvp.confirmed)
+    return "Set %s to checked"%(rsvp.name)
 @app.route('/rsvp/deny/<id>', methods=['GET'])
 def rsvpdeny(id):
-    db.session.query(RSVP).filter_by(unique_hash=id).update({"confirmed":False, "checked":True})
-    rsvp = db.session.query(RSVP).filter_by(unique_hash=id).first()
+    db.session.query(RSVP).filter_by(unique_hash=id).delete()
     db.session.commit()
-    return "Set %s to Denied and checked: %s"%(rsvp.name, rsvp.confirmed)
+    return "Spam Deleted: %s"%(id)
 @app.route('/rsvp', methods=['GET', 'POST'])
 def rsvp():
-    confirmedAttending = db.session.query(RSVP).filter_by(confirmed=True,attending=True).all()
+    confirmedAttending = db.session.query(RSVP).filter_by(checked=True,attending=True).all()
     if request.method == 'POST':
         attending = False
         errors = dict()
@@ -66,8 +65,7 @@ def rsvp():
                 session['rsvp_id'] = rsvp.id
 
                 msg = Message("RSVP submission", recipients=[
-                    'sinjax@gmail.com'
-                    ,'katimi18@gmail.com'
+                    "emmasinaweddingtime@gmail.com"
                 ]
                 ,sender="rsvp@emmasinaweddingtime.info"
                 ,reply_to=rsvp.email)
