@@ -1,25 +1,29 @@
-from wedding import app
+from flask.ext.mail import Message
+from wedding import app,mail
 from helpers import *
 from wedding.models import *
 from flask import request, flash, redirect, url_for, session, render_template, make_response
+from IPython import embed
 
 @app.route('/rsvp/confirm/<id>', methods=['GET'])
 def rsvpconfirm(id):
+    db.session.query(RSVP).filter_by(unique_hash=id).update({"confirmed":True})
     rsvp = db.session.query(RSVP).filter_by(unique_hash=id).first()
-    print rsvp.name
-    return "Confirmed id: %s"%rsvp
+    db.session.commit()
+    return "Set %s to Confirmed: %s"%(rsvp.name, rsvp.confirmed)
 @app.route('/rsvp/deny/<id>', methods=['GET'])
 def rsvpdeny(id):
     return "Done for id: %s"%id
 @app.route('/rsvp', methods=['GET', 'POST'])
 def rsvp():
+    confirmedAttending = db.session.query(RSVP).filter_by(confirmed=True,attending=True).all()
     if request.method == 'POST':
         attending = False
         errors = dict()
         if invalid(request.form,'name'): 
             errors['name'] = 'Name is required'
         bringingFood = 'bringfood' in request.form
-        if (not request.form['email'] or request.form['phone']) and bringingFood:
+        if (not request.form['email'] or not request.form['phone']) and bringingFood:
             errors['email'] = 'Email or mobile is required if you\'d like to bring food'
             errors['phone'] = 'Email or mobile is required if you\'d like to bring food'
         
@@ -58,13 +62,25 @@ def rsvp():
                 db.session.commit()
                 session['rsvp_id'] = rsvp.id
 
+                msg = Message("RSVP submission", recipients=[
+                    'sinjax@gmail.com'
+                    # ,'katimi18@gmail.com'
+                ]
+                ,sender="rsvp@emmasinaweddingtime.info"
+                ,reply_to=rsvp.email)
+                if rsvp.attending:
+                    msg.body = render_template('email/rsvp_accept.txt', rsvp=rsvp)
+                else:
+                    msg.body = render_template('email/rsvp_reject.txt', rsvp=rsvp)
+                mail.send(msg)
+
                 return render("rsvp_result.html",form=request.form,errors=errors)
             except Exception, e:
                 errors["dberror"] = "Could not create db object: %s"%e
-                return render("rsvp.html",errors=errors,form=request.form)
+                return render("rsvp.html",errors=errors,form=request.form,confirmedAttending=confirmedAttending)
 
         else:
-            return render("rsvp.html",errors=errors,form=request.form)
+            return render("rsvp.html",errors=errors,form=request.form,confirmedAttending=confirmedAttending)
     form = {}
-    return render("rsvp.html",form=form,errors={})
+    return render("rsvp.html",form=form,errors={},confirmedAttending=confirmedAttending)
 

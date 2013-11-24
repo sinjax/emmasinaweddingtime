@@ -22,7 +22,9 @@ $(document).ready(function () {
 {% block content %}
 
 <h1>RSVP</h1>
-
+{% if 'dberror' in errors %}
+	<span class="help-block">{{ errors.dberror }}</span>
+{% endif %}
 <form method="post" action="" role="form">
 	<div class="form-group{% if 'name' in errors %} has-error{% endif %}">
 		<label for="elm_name">Name</label>
@@ -94,7 +96,7 @@ $(document).ready(function () {
 		<label >
 			Details and Comments
 		</label>
-		<textarea class="form-control" name="comments" rows="3"></textarea>
+		<textarea class="form-control" name="comments" rows="3">{{form.comments}}</textarea>
 		<p class="help-block" id="elm_name_guide">If you are coming: Which days you'll be in the area (the whole weekend, just the saturday eve party? etc.). If you are staying the weekend, would you like a room in the hostel, or are you planning on finding your own accommodation near by? If you aren't coming, sadness! please let us know why!</p>
 
 	</div>
@@ -104,4 +106,9 @@ $(document).ready(function () {
 
 <h2> Current Guest List </h2>
 <p>These lovely people have confirmed so far. If you know them perhaps you'd like to self organise a lift share?</p>
+{% for entry in confirmedAttending %}
+    <li><h2>{{ entry.name }}</h2>
+{% else %}
+<li><em>Unbelievable.  No entries here so far</em>
+{% endfor %}
 {% endblock %}
