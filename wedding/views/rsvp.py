@@ -7,13 +7,16 @@ from IPython import embed
 
 @app.route('/rsvp/confirm/<id>', methods=['GET'])
 def rsvpconfirm(id):
-    db.session.query(RSVP).filter_by(unique_hash=id).update({"confirmed":True})
+    db.session.query(RSVP).filter_by(unique_hash=id).update({"confirmed":True, "checked":True})
     rsvp = db.session.query(RSVP).filter_by(unique_hash=id).first()
     db.session.commit()
     return "Set %s to Confirmed: %s"%(rsvp.name, rsvp.confirmed)
 @app.route('/rsvp/deny/<id>', methods=['GET'])
 def rsvpdeny(id):
-    return "Done for id: %s"%id
+    db.session.query(RSVP).filter_by(unique_hash=id).update({"confirmed":False, "checked":True})
+    rsvp = db.session.query(RSVP).filter_by(unique_hash=id).first()
+    db.session.commit()
+    return "Set %s to Denied and checked: %s"%(rsvp.name, rsvp.confirmed)
 @app.route('/rsvp', methods=['GET', 'POST'])
 def rsvp():
     confirmedAttending = db.session.query(RSVP).filter_by(confirmed=True,attending=True).all()
@@ -64,7 +67,7 @@ def rsvp():
 
                 msg = Message("RSVP submission", recipients=[
                     'sinjax@gmail.com'
-                    # ,'katimi18@gmail.com'
+                    ,'katimi18@gmail.com'
                 ]
                 ,sender="rsvp@emmasinaweddingtime.info"
                 ,reply_to=rsvp.email)

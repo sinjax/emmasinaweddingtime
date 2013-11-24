@@ -7,11 +7,14 @@ from IPython import embed
 import uuid
 db = SQLAlchemy(app)
 
+def genuuid():
+    return uuid.uuid4().hex
+
 class BaseFields(object):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=func.now())
     updated_at = db.Column(db.DateTime, default=func.now(), onupdate=func.now())
-    unique_hash = db.Column(db.Text, default=uuid.uuid4().hex)
+    unique_hash = db.Column(db.Text, default=genuuid)
 
     @declared_attr
     def __tablename__(cls):

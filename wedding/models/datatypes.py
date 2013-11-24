@@ -10,3 +10,4 @@ class RSVP(BaseFields, db.Model):
     nchildren = db.Column(db.Integer)
     bringingFood = db.Column(db.Boolean)
     confirmed = db.Column(db.Boolean,default=False)
+    checked = db.Column(db.Boolean,default=False)

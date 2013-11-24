@@ -2,6 +2,7 @@
 
 ===============================
 They provided the following information:
+name: {{rsvp.name}}
 email: {{rsvp.email}}
 phone: {{rsvp.phone}}
 Number of adults: {{rsvp.nadults}}
