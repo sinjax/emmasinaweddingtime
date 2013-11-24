@@ -1,7 +1,59 @@
 {% extends "base.html" %}
 {% block title %}Location{% endblock %}
-{% block content %}
+{% block script %}
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+  function initialize() {
+  	var loc = new google.maps.LatLng(52.635496 ,-2.488539)
+  	var map_canvas = document.getElementById('map_canvas');
+  	 var map_options = {
+      center: loc,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
 
-<h1>Coalbrooke Dale</h1>
+    var map = new google.maps.Map(map_canvas,map_options);
+    var myMarkerOpts = {
+        position: loc,
+        map: map
+      };
+
+	var marker = new google.maps.Marker(myMarkerOpts);
+
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{% endblock %}
+{% block content %}
+{% include 'tldr.html' %}
+
+<h1>Getting there</h1>
+
+<address>
+  <strong>Coalbrookdale YHA</strong><br>
+  	1 Paradise,<br>
+  	Coalbrookdale,<br>
+  	Telford, <br>
+	Shropshire, <br>
+	TF8 7NR  <br>
+</address>
+
+<div id="map_canvas"></div>
+<img class="infobox" src="{{ url_for('static', filename='assets/imgs/hostel_1.jpg') }}" alt="hostel exterior">
+<img class="infobox" src="{{ url_for('static', filename='assets/imgs/hostel_2.jpg') }}" alt="hostel exterior">
+
+<h3>The Hostel and Local attractions</h3>
+<p>You can find more information about the hostel itself <a href="http://www.yha.org.uk/hostel/ironbridge-coalbrookdale">here</a></p>
+
+<p>The local area has plenty to keep yourself occupied with and Ironbridge Gorge is a world heritage site so it is a beautiful place to just go rambling.</p>
+
+<p><a href="http://www.ironbridge.org.uk/">Their webiste</a> has lots of useful information if you're looking to plan some fun for Sunday and Monday.</p>
+
+<h3>Parking</h3>
+
+You can do drop offs at the hostel itself, but you cannot park there.
+There are many local long stay car parks within walking distance of the hostel.
 
 {% endblock %}

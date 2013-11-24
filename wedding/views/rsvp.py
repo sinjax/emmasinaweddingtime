@@ -3,6 +3,14 @@ from helpers import *
 from wedding.models import *
 from flask import request, flash, redirect, url_for, session, render_template, make_response
 
+@app.route('/rsvp/confirm/<id>', methods=['GET'])
+def rsvpconfirm(id):
+    rsvp = db.session.query(RSVP).filter_by(unique_hash=id).first()
+    print rsvp.name
+    return "Confirmed id: %s"%rsvp
+@app.route('/rsvp/deny/<id>', methods=['GET'])
+def rsvpdeny(id):
+    return "Done for id: %s"%id
 @app.route('/rsvp', methods=['GET', 'POST'])
 def rsvp():
     if request.method == 'POST':

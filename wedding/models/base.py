@@ -4,12 +4,14 @@ from sqlalchemy.ext.declarative import declared_attr
 from flask.ext.sqlalchemy import SQLAlchemy
 from wedding import app
 from IPython import embed
+import uuid
 db = SQLAlchemy(app)
 
 class BaseFields(object):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=func.now())
     updated_at = db.Column(db.DateTime, default=func.now(), onupdate=func.now())
+    unique_hash = db.Column(db.Text, default=uuid.uuid4().hex)
 
     @declared_attr
     def __tablename__(cls):

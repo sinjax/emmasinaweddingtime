@@ -9,3 +9,4 @@ class RSVP(BaseFields, db.Model):
     nadults = db.Column(db.Integer)
     nchildren = db.Column(db.Integer)
     bringingFood = db.Column(db.Boolean)
+    confirmed = db.Column(db.Boolean,default=False)

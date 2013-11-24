@@ -13,6 +13,21 @@
 .nav > li > a {
     padding: 15px;
 }
+
+
+.infobox>ul{
+  list-style: none;
+  padding:1em;
+}
+.infobox{
+  clear: right;
+  margin-bottom:1em;
+}
+#map_canvas {
+  width: 100%;
+  margin-bottom:2em;
+  
+}
 /* Customize container */
 @media (min-width: 700px) {
     #titleimg {
@@ -20,6 +35,13 @@
       height:380px;
       background-image: url("../imgs/weddingtime700px.png");
       background-repeat: no-repeat;
+    }
+    .infobox{
+      float:right;
+      width:300px;
+    }
+    #map_canvas {
+      height:300px;
     }
 }
 @media (max-width: 699px) and (min-width: 500px) { 
@@ -29,6 +51,13 @@
       background-image: url("../imgs/weddingtime500px.png");
       background-repeat: no-repeat;
     }
+    .infobox{
+      float:right;
+      width:250px;
+    }
+    #map_canvas {
+      height:300px;
+    }
 }
 @media (max-width: 499px){ 
     #titleimg {
@@ -36,6 +65,12 @@
       height:110px;
       background-image: url("../imgs/weddingtime300px.png");
       background-repeat: no-repeat;
+    }
+    #map_canvas {
+      height:300px;
+    }
+    .infobox{
+      width:300px;
     }
 }
 @media (max-width: 399px){ 
@@ -45,6 +80,16 @@
       background-image: url("../imgs/weddingtime200px.png");
       background-repeat: no-repeat;
     }
+    #map_canvas {
+      height:200px;
+    }
+    .infobox{
+      width:100%;
+    }
+}
+
+address{
+  font-size:15pt;
 }
 
 .navbar{
@@ -54,3 +99,8 @@
   width:100%;*/
   /*background-color: rgb(255,255,255);*/
 }
+dd{
+  margin-bottom: 1em;
+}
+
+
