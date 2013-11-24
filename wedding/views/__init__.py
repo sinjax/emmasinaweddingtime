@@ -1,6 +1,7 @@
 import rsvp
 from wedding import app
 from helpers import *
+import os
 
 @app.route("/place", methods=["GET"])
 def place(): return render("place.html")
@@ -13,10 +14,14 @@ def dinner(): return render("dinner.html")
 
 @app.route("/templated/<path:filename>", methods=["GET"])
 def templated(filename):
-	staticfile = os.sep.join([PROJECT_ROOT,"static",filename])
+	staticfile = os.sep.join(["wedding/static",filename])
 	if not os.path.exists(staticfile):
-		return None
+		return ""
 
 	content = file(staticfile).read()
 
-	return render_template_string(content)
+	return content
+
+@app.route("/robots.txt", methods=["GET"])
+def robots():
+	return templated("robots.txt")
