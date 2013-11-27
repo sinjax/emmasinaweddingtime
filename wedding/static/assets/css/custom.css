@@ -8,7 +8,6 @@
 #titleimg{
   margin: 0 auto;
   position:relative;
-  margin-bottom:10px;
 }
 .nav > li > a {
     padding: 15px;
@@ -32,7 +31,7 @@
 @media (min-width: 700px) {
     #titleimg {
       width:700px;
-      height:380px;
+      height:294px;
       background-image: url("../imgs/weddingtime700px.png");
       background-repeat: no-repeat;
     }
@@ -47,7 +46,7 @@
 @media (max-width: 699px) and (min-width: 500px) { 
     #titleimg {
       width:500px;
-      height:280px;
+      height:210px;
       background-image: url("../imgs/weddingtime500px.png");
       background-repeat: no-repeat;
     }
