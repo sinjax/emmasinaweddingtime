@@ -72,20 +72,6 @@
       width:300px;
     }
 }
-@media (max-width: 399px){ 
-    #titleimg {
-      width:200px;
-      height:80px;
-      background-image: url("../imgs/weddingtime200px.png");
-      background-repeat: no-repeat;
-    }
-    #map_canvas {
-      height:200px;
-    }
-    .infobox{
-      width:100%;
-    }
-}
 
 address{
   font-size:15pt;
