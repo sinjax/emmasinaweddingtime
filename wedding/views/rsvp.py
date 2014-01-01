@@ -64,7 +64,7 @@ def rsvp():
                 db.session.commit()
                 session['rsvp_id'] = rsvp.id
 
-                msg = Message("RSVP submission", recipients=[
+                msg = Message("RSVP submission from: %s"%rsvp.name, recipients=[
                     "emmasinaweddingtime@gmail.com"
                 ]
                 ,sender="rsvp@emmasinaweddingtime.info"
