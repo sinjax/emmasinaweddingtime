@@ -89,7 +89,7 @@ $(document).ready(function () {
   	</div>
 	<div class="checkbox">
 	    <label>
-	      <input type="checkbox" name="bringfood" class="onlyifcoming" {% if form.bringfood %} checked{% endif %}/> I'd like to bring some food!
+	      <input type="checkbox" name="bringfood" class="onlyifcoming" {% if form.bringfood %} checked{% endif %}/> I'd like to bring some food! <a href="{{ url_for('dinner') }}">click here for the menu</a>
 	    </label>
   	</div>
   	<div class="form-group">
